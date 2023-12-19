@@ -1,6 +1,5 @@
 # Mon Agence immobilier
 
-[Description brève de votre projet]
 
 ## Installation
 
@@ -41,9 +40,8 @@ Avant de commencer, assurez-vous d'avoir [Composer](https://getcomposer.org/) in
 ## Lancement du Projet 
 
 Lancez le serveur de développement Symfony :
-
-    ```bash
-    symfony serve
+   
+      symfony serve
 
 Le projet sera accessible à l'adresse http://localhost:8000.
 
