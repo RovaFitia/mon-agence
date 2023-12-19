@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Property
 {
+    const HEAT = [
+        0 => 'electric' ,
+        1 => 'gaz',
+    ] ;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -75,12 +79,17 @@ class Property
     /**
      * @ORM\Column(type="boolean", options={"default" : false})
      */
-    private $sold;
+    private $sold = false;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime() ;
+    }
 
     public function getId(): ?int
     {
