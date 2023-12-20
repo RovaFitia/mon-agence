@@ -3,33 +3,40 @@
 {% block body %}
     <div class="container mt-4">
         <h2>Gérer les biens : </h2>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Title</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for property in properties %}
-                        <tr>
-                            <td>{{ property.title }}</td>
-                            <td>
-                                <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-success btn-sm">Editer</a>
-                                <form method="POST" action="{{ path('admin.property.delete', {id: property.id}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes vous vraiment sur de supprimer?')">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
-                                    <button class="btn btn-danger btn-sm">Supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
 
-            <div class="text-right">
-                <a href="{{ path('admin.property.new') }}" class="btn btn-primary">Créer un nouveau bien</a>
-            </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.title }}</td>
+                    <td>
+                        <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-success btn-sm">Editer</a>
+                        <form method="POST" action="{{ path('admin.property.delete', {id: property.id}) }}"
+                              style="display: inline-block;"
+                              onsubmit="return confirm('Êtes vous vraiment sur de supprimer?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <a href="{{ path('admin.property.new') }}" class="btn btn-primary">Créer un nouveau bien</a>
+        </div>
     </div>
 
 {% endblock %}
