@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title 'Gérer les biens' %}
+{% block body %}
+    <div class="container mt-4">
+        <h2>Gérer les biens : </h2>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for property in properties %}
+                        <tr>
+                            <td>{{ property.title }}</td>
+                            <td>
+                                <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-success btn-sm">Editer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+{% endblock %}
