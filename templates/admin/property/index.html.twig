@@ -16,6 +16,11 @@
                             <td>{{ property.title }}</td>
                             <td>
                                 <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-success btn-sm">Editer</a>
+                                <form method="POST" action="{{ path('admin.property.delete', {id: property.id}) }}" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+                                    <button class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}
