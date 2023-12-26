@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Doctrine\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,22 +32,28 @@ class PropertyController extends AbstractController
 
     /**
      * @Route("/biens", name="property.index")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $property = $this->repository->findAllVisible() ;
-        dump($property) ;
-        //$property[0]->setSold(true) ;
+        $properties = $paginator->paginate(
+            $this->repository->findAllVisibleQuery() ,
+            $request->query->getInt('page', 1),
+            12
+        );
 
-        //$this->em->flush();
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
+            'properties' => $properties
         ]) ;
     }
 
     /**
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
+     * @param Property $property
+     * @param string $slug
      * @return Response
      */
     public function show(Property $property, string $slug): Response

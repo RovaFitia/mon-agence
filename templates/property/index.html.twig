@@ -3,5 +3,17 @@
 {% block body %}
     <div class="container">
         <h1>Listes des biens</h1>
+
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+        {# pagination #}
+        <div class="pagination">
+            {{ knp_pagination_render(properties) }}
+        </div>
     </div>
 {% endblock %}
