@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 {% block title 'Voir tous les biens' %}
 {% block body %}
-    <div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minSurface) }}
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <button class="btn btn-primary">Recherche</button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="container mt-3">
         <h1>Listes des biens</h1>
 
         <div class="row">
