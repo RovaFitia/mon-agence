@@ -72,6 +72,17 @@ class PropertyRepository extends ServiceEntityRepository
             ;
         }
 
+        if($search->getOptions()->count() > 0) {
+            $k = 0 ;
+            foreach ($search->getOptions() as $option) {
+                $k++ ;
+                $query = $query
+                    ->andWhere(":option$k MEMBER OF p.options")
+                    ->setParameter("option$k", $option)
+                ;
+            }
+        }
+
         return $query->getQuery();
     }
 
