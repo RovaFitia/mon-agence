@@ -31,3 +31,7 @@ services:
 
     # Ajouter un alias pour l'interface ObjectManager
     Doctrine\Persistence\ObjectManager: '@doctrine.orm.default_entity_manager'
+
+    App\Listener\ImageCacheSubscriber:
+        tags:
+         - { name: doctrine.event_subscriber }
